@@ -21,13 +21,13 @@ public class CompraService {
     @Autowired
     private EventoService eventoService;
 
-    public Compra salvarCompra(Compra compra) {
-        Usuario usuario = usuarioService.getUsuario(compra.getUsuario());
+    public Compra salvarCompra(Compra compra, String token) {
+        Usuario usuario = usuarioService.getUsuario(compra.getUsuario(), token);
 
         compra.setNome(usuario.getNome());
         compra.setDataCompra(LocalDateTime.now());
 
-        eventoService.salvarEvento(usuario.getEmail(), "Compra realizada");
+        eventoService.salvarEvento(usuario.getEmail(), "Compra realizada", token);
         return compraRepository.save(compra);
     }
 
