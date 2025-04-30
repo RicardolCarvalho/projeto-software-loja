@@ -50,5 +50,5 @@ jobs:
           docker stop loja
           docker rm --force loja 
           docker run -d -p 8081:8081 \
-            -e USER_DB=${{ secrets.MONGO }} \
+            -e MONGO=${{ secrets.MONGO }} \
           --name loja --network=rede ricardolcarvalho/loja-ci:${{ github.sha }}
